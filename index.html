@@ -503,6 +503,7 @@ function barChart(data){
   const W=640,H=230,L=70,B=28,T=14,R=10,pw=W-L-R,ph=H-T-B,mx=Math.max(1,...data.map(x=>Math.max(x.a,x.b)));
   const mag=Math.pow(10,Math.floor(Math.log10(mx))),top=[1,1.5,2,2.5,3,4,5,6,8,10].map(x=>x*mag).find(x=>x>=mx)||mx;
   let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block" role="img" aria-label="Sotuv va xarid diagrammasi">`;
+  if(!data.some(x=>x.a||x.b))return s+`<text x="${W/2}" y="${H/2}" text-anchor="middle" font-size="14" fill="var(--mut)">Hali maʼlumot yoʻq. Hujjat qoʻshilgach diagramma shu yerda chiqadi.</text></svg>`;
   for(let i=0;i<=4;i++){const y=T+ph-ph*i/4;s+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--mut)">${short(top*i/4)}</text>`}
   const gw=pw/data.length,bw=Math.min(26,gw*.28);
   data.forEach((d,i)=>{const cx=L+gw*i+gw/2,ha=ph*d.a/top,hb=ph*d.b/top;
