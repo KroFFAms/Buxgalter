@@ -659,6 +659,7 @@ const A={
 
   cloudin(){
     const url=$('c_url').value.trim().replace(/\/+$/,''),key=$('c_key').value.trim(),em=$('c_em').value.trim(),pw=$('c_pw').value;
+    if(S.sess&&!pw&&url===S.cfg.url&&key===S.cfg.key&&em===S.cfg.email){syncAll(true);return 'norender'}
     if(!/^https:\/\//.test(url)||!key||!em||!pw){alert('URL, kalit, email va parolni toʻldiring');return 'norender'}
     S.cfg={url,key,email:em};
     cloudLogin(em,pw).then(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}return syncAll(true)}).catch(e=>{alert(e.message);render()});
